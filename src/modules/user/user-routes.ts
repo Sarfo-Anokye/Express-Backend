@@ -1,5 +1,5 @@
 import express from "express";
 
-const router = express.Router();
+const userRouter = express.Router();
 
-export default router;
+export default userRouter;

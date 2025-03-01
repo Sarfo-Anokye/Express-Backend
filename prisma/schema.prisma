@@ -8,3 +8,31 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model user{
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  rentals rental[]
+}
+
+model movie {
+  id String @id @default(uuid())
+  name String
+  genre String
+  rentals rental[]
+}
+
+model rental {
+  id String @id @default(uuid())
+  user_id String  
+  movie_id String
+  rented_at DateTime @default(now())
+  returned_at DateTime?
+  due_date DateTime
+
+  user user @relation(fields: [user_id],references: [id])
+  movie movie @relation(fields: [movie_id],references: [id])
+  
+}

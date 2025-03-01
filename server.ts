@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import sanitizeMiddleware from "./src/middleware/sanitize-middleware";
 import routes from "./src/config/routes";
+import errorHandler from "./src/middleware/error-handler-middlewar";
 
 const app: Application = express();
 // Middleware
@@ -14,6 +15,8 @@ app.use(express.urlencoded({extended: true}));
 
 // Routes
 app.use("/api/v1", routes);
+
+app.use(errorHandler);
 
 // Start Server
 const PORT = process.env.PORT || 5000;

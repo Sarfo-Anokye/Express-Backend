@@ -1,19 +1,23 @@
-import {Request, Response} from "express";
+import {NextFunction, Request, Response} from "express";
 import {UserService} from "./user-service";
+import {LoggerService} from "../logger/logger-service";
 
 export class UserController {
-  private userService: UserService;
-
-  constructor(userService: UserService) {
-    this.userService = userService;
+  private readonly logger;
+  constructor(
+    private userService: UserService,
+    private loggerService: LoggerService
+  ) {
+    this.logger = this.loggerService.getLogger("user");
   }
-  //jjjb
-  async createUser(req: Request, res: Response) {
+
+  async createUser(req: Request, res: Response, next: NextFunction) {
     try {
       const user = await this.userService.createUser(req.body);
       res.status(201).json(user);
     } catch (error) {
-      res.status(500).json({error: "Failed to create user"});
+      this.logger.error(error);
+      next(error);
     }
   }
 }

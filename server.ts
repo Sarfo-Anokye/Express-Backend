@@ -1,13 +1,14 @@
 import express, {Application} from "express";
 import cors from "cors";
 import helmet from "helmet";
+import sanitizeMiddleware from "./src/middleware/sanitize-middlewar";
 
 const app: Application = express();
-// assas
 // Middleware
 app.use(cors());
 app.use(helmet());
 app.use(express.json());
+app.use(sanitizeMiddleware);
 app.use(express.urlencoded({extended: true}));
 
 // Routes

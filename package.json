@@ -22,7 +22,8 @@
     "helmet": "^8.0.0",
     "sanitize-html": "^2.14.0",
     "winston": "^3.17.0",
-    "winston-daily-rotate-file": "^5.0.0"
+    "winston-daily-rotate-file": "^5.0.0",
+    "yup": "^1.6.1"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",

@@ -1,7 +1,7 @@
 import express, {Application} from "express";
 import cors from "cors";
 import helmet from "helmet";
-import sanitizeMiddleware from "./src/middleware/sanitize-middlewar";
+import sanitizeMiddleware from "./src/middleware/sanitize-middleware";
 
 const app: Application = express();
 // Middleware

@@ -1,10 +1,9 @@
-import "dotenv/config";
 import express, {Application} from "express";
 import cors from "cors";
 import helmet from "helmet";
 
 const app: Application = express();
-
+// assas
 // Middleware
 app.use(cors());
 app.use(helmet());

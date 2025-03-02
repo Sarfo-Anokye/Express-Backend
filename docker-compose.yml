@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   db:
     image: postgres
@@ -7,7 +7,7 @@ services:
       POSTGRES_PASSWORD: ${DB_PASS}
       POSTGRES_DB: ${DB_NAME_TEST}
     ports:
-      - '5433:5432'
+      - "5432:5432"
     volumes:
       - postgres_data_1:/var/lib/postgresql/data
 volumes:

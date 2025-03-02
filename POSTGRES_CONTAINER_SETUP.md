@@ -15,7 +15,6 @@ In the project root directory, create a file named **`.env`** to store database 
 ```ini
 DB_USER=your_username
 DB_PASS=your_password
-POSTGRES_DB=your_database
 DB_NAME_TEST=your_database
 ```
 
@@ -23,6 +22,6 @@ DB_NAME_TEST=your_database
 
 In your terminal, type the following command
 
-docker-compose run -d
-or(for newer versions of Docker Compose)
-docker compose run -d
+- docker-compose run -d
+  or (for newer versions of Docker Compose)
+- docker compose run -d

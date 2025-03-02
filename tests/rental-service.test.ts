@@ -1,11 +1,9 @@
-import {rental} from "@prisma/client";
 import {MovieService} from "../src/modules/movie/movie-service";
 import {RentalType} from "../src/modules/rentals/interface/rental-type";
 import {PrismaRentalRepository} from "../src/modules/rentals/prisma-rental-repository";
 import {RentalService} from "../src/modules/rentals/rental-service";
 import {UserService} from "../src/modules/user/user-service";
 import CustomError from "../src/utils/custom-error";
-import {boolean} from "yup";
 
 describe("RentalService", () => {
   let rentalService: RentalService;
@@ -39,10 +37,8 @@ describe("RentalService", () => {
   };
 
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
 
-    // Create mock repositories and services with all required methods
     mockRentalRepository = {
       rentMovie: jest.fn(),
       returnMovie: jest.fn(),
@@ -75,15 +71,12 @@ describe("RentalService", () => {
     };
 
     it("should rent a movie successfully when user and movie exist", async () => {
-      // Setup
       mockUserService.getUserById.mockResolvedValue(mockUser);
       mockMovieService.getMovieById.mockResolvedValue(mockMovie);
       mockRentalRepository.rentMovie.mockResolvedValue(mockRental);
 
-      // Execute
       const result = await rentalService.rentMovie(rentalData);
 
-      // Verify
       expect(mockUserService.getUserById).toHaveBeenCalledWith(
         rentalData.user_id
       );
@@ -95,10 +88,8 @@ describe("RentalService", () => {
     });
 
     it("should throw an error when user does not exist", async () => {
-      // Setup
       mockUserService.getUserById.mockResolvedValue(null);
 
-      // Execute & Verify
       await expect(rentalService.rentMovie(rentalData)).rejects.toThrow(
         new CustomError("Failed to rent movie, user record not found")
       );
@@ -111,11 +102,9 @@ describe("RentalService", () => {
     });
 
     it("should throw an error when movie does not exist", async () => {
-      // Setup
       mockUserService.getUserById.mockResolvedValue(mockUser);
       mockMovieService.getMovieById.mockResolvedValue(null);
 
-      // Execute & Verify
       await expect(rentalService.rentMovie(rentalData)).rejects.toThrow(
         new CustomError("Failed to rent movie, movie record not found")
       );
@@ -138,24 +127,19 @@ describe("RentalService", () => {
     };
 
     it("should return a movie successfully when rental exists", async () => {
-      // Setup
       mockRentalRepository.getRentalById.mockResolvedValue(mockRental);
       mockRentalRepository.returnMovie.mockResolvedValue(true);
 
-      // Execute
       const result = await rentalService.returnMovie(rentalId);
 
-      // Verify
       expect(mockRentalRepository.getRentalById).toHaveBeenCalledWith(rentalId);
       expect(mockRentalRepository.returnMovie).toHaveBeenCalledWith(rentalId);
       expect(result).toBeTruthy();
     });
 
     it("should throw an error when rental does not exist", async () => {
-      // Setup
       mockRentalRepository.getRentalById.mockResolvedValue(null);
 
-      // Execute & Verify
       await expect(rentalService.returnMovie(rentalId)).rejects.toThrow(
         new CustomError("Rental record does not exist")
       );
@@ -167,15 +151,12 @@ describe("RentalService", () => {
 
   describe("getAllRentals", () => {
     it("should return all rentals with default pagination", async () => {
-      // Setup
       const skip = 0;
       const take = 10;
       mockRentalRepository.getAllRentals.mockResolvedValue(mockRentalsList);
 
-      // Execute
       const result = await rentalService.getAllRentals(skip, take);
 
-      // Verify
       expect(mockRentalRepository.getAllRentals).toHaveBeenCalledWith(
         skip,
         take
@@ -184,15 +165,12 @@ describe("RentalService", () => {
     });
 
     it("should return all rentals with custom pagination", async () => {
-      // Setup
       const skip = 10;
       const take = 20;
       mockRentalRepository.getAllRentals.mockResolvedValue(mockRentalsList);
 
-      // Execute
       const result = await rentalService.getAllRentals(skip, take);
 
-      // Verify
       expect(mockRentalRepository.getAllRentals).toHaveBeenCalledWith(
         skip,
         take

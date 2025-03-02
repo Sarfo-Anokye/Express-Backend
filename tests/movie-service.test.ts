@@ -15,8 +15,7 @@ describe("MovieService", () => {
     genre: "Action",
     releaseYear: 2023,
     director: "Test Director"
-    // Add any other required movie properties
-  } as any; // Using 'any' since we don't have the complete movie type definition
+  } as any;
 
   const mockMovieList: ListAllMoviesResponeType = {
     data: [mockMovie],
@@ -24,10 +23,8 @@ describe("MovieService", () => {
   };
 
   beforeEach(() => {
-    // Clear all mocks before each test
     jest.clearAllMocks();
 
-    // Create a mock repository with all required methods
     mockMovieRepository = {
       createMovie: jest.fn(),
       updateMovie: jest.fn(),
@@ -36,7 +33,6 @@ describe("MovieService", () => {
       getAllMovies: jest.fn()
     } as unknown as jest.Mocked<PrismaMovieRepository>;
 
-    // Create the MovieService with the mock repository
     movieService = new MovieService(mockMovieRepository);
   });
 
@@ -47,13 +43,10 @@ describe("MovieService", () => {
     };
 
     it("should create a movie successfully", async () => {
-      // Setup
       mockMovieRepository.createMovie.mockResolvedValue(mockMovie);
 
-      // Execute
       const result = await movieService.createMovie(createMovieDTO);
 
-      // Verify
       expect(mockMovieRepository.createMovie).toHaveBeenCalledWith(
         createMovieDTO
       );

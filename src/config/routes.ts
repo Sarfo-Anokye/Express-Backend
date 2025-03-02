@@ -8,4 +8,6 @@ routes.use("/users", userRouter);
 
 routes.use("/movies", movieRouter);
 
+routes.use("/rentals", movieRouter);
+
 export default routes;

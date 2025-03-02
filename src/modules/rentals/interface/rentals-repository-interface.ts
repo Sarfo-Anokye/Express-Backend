@@ -5,4 +5,5 @@ export interface IRentalRepository {
   rentMovie(data: RentalType): Promise<rental>;
   returnMovie(rentalId: string): Promise<boolean>;
   getAllRentals(skip: number, take: number): Promise<ListAllRentalsResponeType>;
+  getRentalById(rentalId: string): Promise<rental>;
 }

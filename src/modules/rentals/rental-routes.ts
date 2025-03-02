@@ -7,7 +7,6 @@ import {rentMovieSchema} from "./rental-schema";
 const rentalRouter = express.Router();
 const rentalController =
   container.resolve<RentalController>("rentalController");
-
 rentalRouter.post(
   "/",
   validate(rentMovieSchema),

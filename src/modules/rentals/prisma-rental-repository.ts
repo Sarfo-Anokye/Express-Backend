@@ -26,7 +26,7 @@ export class PrismaRentalRepository implements IRentalRepository {
         skip,
         take
       }),
-      this.prisma.movie.count()
+      this.prisma.rental.count()
     ]);
 
     return {

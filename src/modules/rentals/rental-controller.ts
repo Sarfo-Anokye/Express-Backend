@@ -12,6 +12,7 @@ export class RentalController {
   }
 
   async rentMovie(req: Request, res: Response, next: NextFunction) {
+    console.log("hello");
     try {
       const {user_id, movie_id} = req.body;
       const rentedAt = new Date();
@@ -26,6 +27,7 @@ export class RentalController {
       const rental = await this.rentalService.rentMovie(data);
       res.status(201).json(rental);
     } catch (error) {
+      console.log(error);
       this.logger.error(error);
       next(error);
     }
@@ -33,10 +35,11 @@ export class RentalController {
 
   async returnMovie(req: Request, res: Response, next: NextFunction) {
     try {
-      const {rentalId} = req.params;
-      const rental = await this.rentalService.returnMovie(rentalId);
-      res.status(200).json(rental);
+      const {id} = req.params;
+      const rental = await this.rentalService.returnMovie(id);
+      res.status(200).json({message: "Movie returned sucessfuly"});
     } catch (error) {
+      console.log(error);
       this.logger.error(error);
       next(error);
     }
